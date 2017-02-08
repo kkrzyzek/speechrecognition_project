@@ -1,0 +1,9 @@
+#ABNF 1.0;
+language pl;
+mode voice;
+root $turning;
+tag-format <semantics/1.0>;
+
+$turning = $turnon {out.turnon=rules.turnon} $device <0-> {out.device=rules.device};
+$turnon = (włącz | uruchom) {out="włącz"};
+$device = urządzenie | narzędzie | maszynę;

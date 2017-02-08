@@ -1,0 +1,17 @@
+#ABNF 1.0;
+language pl;
+mode voice;
+root $machine;
+tag-format <semantics/1.0>;
+
+$machine = $turnoff {out.turnoff=rules.turnoff} | ($action {out.action=rules.action} $howmany <0-> {out.howmany=rules.howmany} $page {out.page=rules.page});
+
+$action = drukuj {out = "drukuj"} | skanuj {out = "skanuj"} | kseruj {out = "kseruj"};
+$page = stronę {out = "stronę"} | strony {out = "strony"} | stron {out = "stron"} | kartkę {out = "kartkę"} | kartki {out = "kartki"}| (plik | dokument) {out = "dokument"};
+$turnoff =  (wyłącz | zamknij) {out="wyłącz"};
+
+$howmany = $digit | $digit2 | $teens | $tens [$digit | $digit2] {out = rules.tens + rules.digit};
+$digit =  jeden {out = 1;} | dwa {out = 2;} | trzy {out = 3;} | cztery {out = 4;} | pięć {out = 5;} | sześć {out = 6;} | siedem {out = 7;} | osiem {out = 8;} | dziewięć { out = 9;};
+$digit2 = jedną {out = 1;} | dwie {out = 2;};
+$teens = jedenaście {out = 11;} | dwanaście {out = 12;} | trzynaście {out = 13;} | czternaście {out = 14;} | piętnaście {out = 15;} | szesnaście {out = 16;} | siedemnaście {out = 17;} | osiemnaście {out = 18;} | dziewiętnaście { out = 19};
+$tens = dwadzieścia {out = 20;} | trzydzieście {out = 30;} | czterdzieści {out = 40;} | piędziesiąt {out = 50;} | sześćdziesiąt {out = 60;} | siedemdziesiąt {out = 70} | osiemdziesiąt {out = 80} | dziewięćdziesiąt {out = 90;};
